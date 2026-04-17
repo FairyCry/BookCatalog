@@ -8,7 +8,7 @@ using (var db = new AppDbContext())
 {
     db.Database.EnsureCreated();
 }
-app.MapGet("/getbooks", (int page, int limit, bool sortbynewest) =>
+app.MapGet("/getbooks", async (int page, int limit, bool sortbynewest) =>
 {
     using var db = new AppDbContext();
     
@@ -19,13 +19,13 @@ app.MapGet("/getbooks", (int page, int limit, bool sortbynewest) =>
         query = query.OrderByDescending(book => book.Id);
     }
     
-    int totalBooks = query.Count();  // ← важно: считаем после фильтрации
+    int totalBooks = query.CountAsync();  // ← важно: считаем после фильтрации
     int totalPages = (int)Math.Ceiling(totalBooks / (double)limit);
     
-    var books = query
+    var books = await query
         .Skip((page - 1) * limit)
         .Take(limit)
-        .ToList();
+        .ToListAsync();
     
     return Results.Json(new { books, totalPages });
 });
