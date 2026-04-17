@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">    
+    <head>
+       <meta charset="UTF-8">
+       <title>Добавить</title>
+    </head>
+    <body>  
+        <div>
+            <input type="text" id="bookName" placeholder="Название книги">
+            <br><br><input type="text" id="bookAuthor" placeholder="Автор книги">
+            <br><br><input type="text" id="bookYear" placeholder="Год выпуска" oninput="checkForm()"> <span style="color: red;">*</span>
+            <br><br><label for="bookGenre">Жанр:</label>
+            <select id="bookGenre">
+                <option value="">Без жанра</option>
+                <option value="Романтика">Романтика</option>
+                <option value="Фантастика">Фантастика</option>
+                <option value="Детектив">Детектив</option>
+                <option value="Наука">Наука</option>
+                <option value="Приключения">Приключения</option>
+            </select>
+            <br><br><button id="sumbitBtn" onclick="sendNewBookData()" disabled>Добавить</button> <span id="yearError"></span>
+            <br><br><button onclick="window.location.href='index.HTML'">Назад</button>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
